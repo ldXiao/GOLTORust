@@ -2,7 +2,7 @@
   "name": "sudoku-wasm-client",
   "version": "0.1.0",
   "main": "src/index.tsx",
-  "homepage": "http://www.lindx.net/sudoku_solver",
+  "homepage": "http://www.lindx.net/wasm-game-of-life",
   "bin": {
     "create-wasm-app": ".bin/create-wasm-app.js"
   },
@@ -24,7 +24,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-bootstrap": "^1.0.0",
-    "sudoku_solver": "file:../pkg",
+    "wasm-game-of-life": "file:../pkg",
     "typescript": "^3.6.4"
   },
   "devDependencies": {

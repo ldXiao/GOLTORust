@@ -22,10 +22,18 @@
 }*/
 
 .Cell{
-  background-color: #fff;
-  position:absolute;
+  background-color: rgb(212, 206, 206);
+  position: absolute;
   /* border-left:1px solid gray; */
   /* border-right:1px solid gray; */
   /* border-top:1px solid gray; */
   /* border-bottom:1px solid gray; */
 } 
+
+.Board{
+    background-color: black;
+    position: absolute;
+    left: 50%;
+    right:50%;
+    transform: translate(-400px,0);
+}
