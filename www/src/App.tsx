@@ -2,9 +2,12 @@ import React, { memo } from 'react';
 import SudokuTable from './components/SudokuTable';
 import { Container, Navbar, Row } from "react-bootstrap";
 import logo from './logo.svg';
-import './App.css'
+// import './App.css'
 import {Universe, Cell} from "wasm-game-of-life";
 import { memory } from "wasm-game-of-life/wasm_game_of_life_bg.wasm";
+import "./components/Grid";
+import {Grid} from './components/Grid';
+import {Game} from './components/Game';
 
 // var memory = new WebAssembly.Memory({initial:10, maximum:100});
 const CELL_SIZE = 5; // px
@@ -60,8 +63,8 @@ function update() {
 
 function App() {
   return (
-    <>
-      <header>
+    <div>
+      {/* <header>
         <Navbar bg="dark" variant="dark">
           <Navbar.Brand href="#home">
             <img
@@ -74,15 +77,12 @@ function App() {
       &nbsp;&nbsp;Game of Life on torus
     </Navbar.Brand>
         </Navbar>
-      </header>
-      <main>
-        <Container>
-          <Row className="mt-3 justify-content-center">
-          <Board/>
-          </Row>
-        </Container>
-      </main>
-    </>
+      </header> */}
+          {/* <Board/> */}
+          {/* <Grid world = {[[false,true],[true,false]]}/> */}
+          <Game/>
+
+    </div>
   );
 }
 
