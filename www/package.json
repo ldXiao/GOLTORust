@@ -1,8 +1,8 @@
 {
-  "name": "sudoku-wasm-client",
+  "name": "su",
   "version": "0.1.0",
   "main": "src/index.tsx",
-  "homepage": "http://www.lindx.net/wasm-game-of-life",
+  "homepage": "http://wasm-gol.lindx.net",
   "bin": {
     "create-wasm-app": ".bin/create-wasm-app.js"
   },
