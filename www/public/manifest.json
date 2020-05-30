@@ -1,6 +1,6 @@
 {
-    "short_name": "SudokuSolver",
-    "name": "Sudoku Solver Application",
+    "short_name": "wasm-gol",
+    "name": "wasm game of life",
     "icons": [
       {
         "src": "favicon.ico",

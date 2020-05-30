@@ -1,13 +1,14 @@
 extern crate cfg_if;
 extern crate wasm_bindgen;
 extern crate web_sys;
+extern crate rand;
 
 mod utils;
 
 use std::fmt;
 use wasm_bindgen::prelude::*;
 use web_sys::console;
-
+use rand::Rng;
 pub struct Timer<'a> {
     name: &'a str,
 }
@@ -215,6 +216,22 @@ impl Universe {
     pub fn toggle_cell(&mut self, row: u32, column: u32) {
         let idx = self.get_index(row, column);
         self.cells[idx].toggle();
+    }
+
+    pub fn shuffle(&mut self){
+        let mut rng = rand::thread_rng();
+        let randvals: Vec<u64> = (0..self.width * self.height).map(|_| rng.gen_range(0, 140)).collect();
+        let cells:Vec<Cell> = randvals.iter()
+        .map(|i| {
+            if i % 2 == 0 || i % 7 == 0 {
+                Cell::Alive
+            } else {
+                Cell::Dead
+            }
+        })
+        .collect();
+
+        self.cells = cells;
     }
 }
 

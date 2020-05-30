@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import SudokuTable from './components/SudokuTable';
 import { Container, Navbar, Row } from "react-bootstrap";
 import logo from './logo.svg';
 // import './App.css'
@@ -64,24 +63,7 @@ function update() {
 function App() {
   return (
     <div>
-      {/* <header>
-        <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="#home">
-            <img
-              src={logo}
-              width="30"
-              height="30"
-              className="d-inline-block align-top sudoku-logo"
-              alt="bla"
-            />
-      &nbsp;&nbsp;Game of Life on torus
-    </Navbar.Brand>
-        </Navbar>
-      </header> */}
-          {/* <Board/> */}
-          {/* <Grid world = {[[false,true],[true,false]]}/> */}
           <Game/>
-
     </div>
   );
 }
