@@ -3,7 +3,7 @@ import {Universe, Cell} from "wasm-game-of-life";
 import {Grid} from  "./Grid";
 import { memory } from "wasm-game-of-life/wasm_game_of_life_bg.wasm";
 import Controls from "./Controls";
-
+import Presets from "./Preset";
 /* this is a wrapper class to interact with wasm */
 const universe = Universe.new();
 // Construct the universe, and get its width and height.
@@ -12,6 +12,7 @@ const height = universe.height();
 const changeArrayValue = (arr:any[], i:number, val:any) => [
     ...arr.slice(0, i), val, ...arr.slice(i + 1)
 ];
+
 
 const createWorld=()=>{
     return Array(width).fill(0).map(() => Array(height).fill(false))
@@ -64,11 +65,23 @@ export class Game extends React.Component {
     clearInterval(this.state.interval);
     }
 
+    onPreset = (typein:number) => {
+        universe.preset(typein);
+        this.setState(
+            {
+                world: getWorld(this.state.world),
+                generation:0,
+            }
+        );
+    }
+
     render() {
         const { world, playing } = this.state;
     return (
       <div>
+          
         <Grid world={world} onChange={this.onChange} />
+        <p>Generation: {this.state.generation}</p>
         <Controls
           next={this.onNext}
           play={this.onPlay}
@@ -76,7 +89,10 @@ export class Game extends React.Component {
           playing={playing}
           shuffle={this.onShuffle}
         />
-        <p>Generation: {this.state.generation}</p>
+        <Presets
+          load={this.onPreset}
+          playing={playing}
+        />
       </div>
     );
 
