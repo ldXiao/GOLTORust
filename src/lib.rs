@@ -161,7 +161,6 @@ impl Universe {
 
         self.cells = next;
     }
-f70
     pub fn new() -> Universe {
         utils::set_panic_hook();
 
@@ -236,7 +235,7 @@ f70
 
     pub fn preset(&mut self, typein: u32){
         let cells = (0..self.width * self.height)
-            .map(|i| {
+            .map(|_i| {
                 Cell::Dead
             })
             .collect();
@@ -244,7 +243,7 @@ f70
         let seeds:Vec<(u32, u32)> =
         match typein {
             0 => (1..self.width-1).map(
-                |i| (i, self.height / 2)
+                |i| (self.height / 2,i)
             ).collect(),
             1=>vec![(3,1),(3,2),(3,3),(2,3),(1,2)],
             2=>vec![(17,16),(18,10),(18,11),(19,11),(19,15),(19,16),(19,17)],
