@@ -1,13 +1,14 @@
 extern crate cfg_if;
 extern crate wasm_bindgen;
 extern crate web_sys;
+extern crate rand;
 
 mod utils;
 
 use std::fmt;
 use wasm_bindgen::prelude::*;
 use web_sys::console;
-
+use rand::Rng;
 pub struct Timer<'a> {
     name: &'a str,
 }
@@ -160,12 +161,11 @@ impl Universe {
 
         self.cells = next;
     }
-
     pub fn new() -> Universe {
         utils::set_panic_hook();
 
         let width = 128;
-        let height = 128;
+        let height = 119;
 
         let cells = (0..width * height)
             .map(|i| {
@@ -215,6 +215,141 @@ impl Universe {
     pub fn toggle_cell(&mut self, row: u32, column: u32) {
         let idx = self.get_index(row, column);
         self.cells[idx].toggle();
+    }
+
+    pub fn shuffle(&mut self){
+        let mut rng = rand::thread_rng();
+        let randvals: Vec<u64> = (0..self.width * self.height).map(|_| rng.gen_range(0, 140)).collect();
+        let cells:Vec<Cell> = randvals.iter()
+        .map(|i| {
+            if i % 2 == 0 || i % 7 == 0 {
+                Cell::Alive
+            } else {
+                Cell::Dead
+            }
+        })
+        .collect();
+
+        self.cells = cells;
+    }
+
+    pub fn preset(&mut self, typein: u32){
+        let cells = (0..self.width * self.height)
+            .map(|_i| {
+                Cell::Dead
+            })
+            .collect();
+        self.cells = cells;
+        let seeds:Vec<(u32, u32)> =
+        match typein {
+            0 => (1..self.width-1).map(
+                |i| (self.height / 2,i)
+            ).collect(),
+            1=>vec![(3,1),(3,2),(3,3),(2,3),(1,2)],
+            2=>vec![(17,16),(18,10),(18,11),(19,11),(19,15),(19,16),(19,17)],
+            3=>vec![
+                (2,4),
+                (2,5),
+                (2,6),
+                (2,10),
+                (2,11),
+                (2,12),
+            
+                (4,2),
+                (4,7),
+                (4,9),
+                (4,14),
+            
+                (5,2),
+                (5,7),
+                (5,9),
+                (5,14),
+            
+                (6,2),
+                (6,7),
+                (6,9),
+                (6,14),
+            
+                (7,4),
+                (7,5),
+                (7,6),
+                (7,10),
+                (7,11),
+                (7,12),
+            
+                (9,4),
+                (9,5),
+                (9,6),
+                (9,10),
+                (9,11),
+                (9,12),
+            
+                (10,2),
+                (10,7),
+                (10,9),
+                (10,14),
+            
+                (11,2),
+                (11,7),
+                (11,9),
+                (11,14),
+            
+                (12,2),
+                (12,7),
+                (12,9),
+                (12,14),
+            
+                (14,4),
+                (14,5),
+                (14,6),
+                (14,10),
+                (14,11),
+                (14,12), 
+            ],
+            4=>vec![
+                (5,1),
+                (5,2),
+                (6,1),
+                (6,2),
+
+                (3,13), 
+                (3,14),
+                (4,12), 
+                (4,16),
+                (5,11), 
+                (5,17),
+                (6,11), 
+                (6,15),
+                (6,17), 
+                (6,18),
+                (7,11), 
+                (7,17),
+                (8,12), 
+                (8,16),
+                (9,13), 
+                (9,14),
+
+                (1,25),
+                (2,23), 
+                (2,25),
+                (3,21), 
+                (3,22),
+                (4,21), 
+                (4,22),
+                (5,21), 
+                (5,22),
+                (6,23), 
+                (6,25),
+                (7,25),
+
+                (3,35), 
+                (3,36),
+                (4,35), 
+                (4,36),
+            ],
+            _=>vec![]
+        };
+        self.set_cells(seeds.as_slice());
     }
 }
 
