@@ -30,7 +30,7 @@ export class Game extends React.Component {
         playing:false,
         interval: setInterval(()=>{},100),
     }
-    onChange = (x:number, y:number) => {
+    private onChange = (x:number, y:number) => {
         universe.toggle_cell(x,y);
         const val = this.state.world[y][x];
         const row = changeArrayValue(this.state.world[y], x, ! val);
@@ -40,7 +40,7 @@ export class Game extends React.Component {
         });
     }
 
-    onNext = () => {
+    private onNext = () => {
         universe.tick();
         this.setState({
             world: getWorld(this.state.world),
@@ -48,12 +48,12 @@ export class Game extends React.Component {
         });
     }
 
-    onPlay = () => {
+    private onPlay = () => {
         this.setState({ playing: true });
         this.state.interval = setInterval(() => this.onNext(), 100);
       }
 
-    onStop = () => {
+    private onStop = () => {
     this.setState({ playing: false });
     clearInterval(this.state.interval);
     }

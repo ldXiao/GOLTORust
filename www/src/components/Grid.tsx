@@ -7,10 +7,10 @@ type gridPropsType = {
 
 export class Grid extends React.Component<gridPropsType> {
 
-   toggleCell = (x:number,y:number) => {
+   private toggleCell = (x:number,y:number) => {
     this.props.onChange(x,y);
    }
-   renderCell=(alive:boolean,x:number, y:number) => {
+   private renderCell=(alive:boolean,x:number, y:number) => {
         return (
             <div key={x}
             className="cell"
@@ -19,7 +19,7 @@ export class Grid extends React.Component<gridPropsType> {
             />
         )
     }
-    renderRow = (row:boolean[], y:number) => (
+    private renderRow = (row:boolean[], y:number) => (
         <div className='row' key={y}>
       {row.map((alive, x) => this.renderCell(alive, x, y))}
     </div>
