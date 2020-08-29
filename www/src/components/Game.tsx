@@ -48,10 +48,6 @@ export class Game extends React.Component {
             generation: this.state.generation +1,
         });
     }
-<<<<<<< HEAD
-
-    private onPlay = () => {
-=======
     onShuffle = () => {
         universe.shuffle();
         this.setState({
@@ -60,7 +56,6 @@ export class Game extends React.Component {
         })
     }
     onPlay = () => {
->>>>>>> a611f84636af4b6b72530a3928aef4893fa1d5af
         this.setState({ playing: true });
         this.state.interval = setInterval(() => this.onNext(), 100);
       }
